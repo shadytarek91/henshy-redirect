@@ -33,7 +33,7 @@
   </style>
   <script>
     const productId = new URLSearchParams(window.location.search).get("id");
-    const deepLink = `henshy://products/${productId}`;
+    const deepLink = `henshy://app/products/${productId}`;
     const isAndroid = /android/i.test(navigator.userAgent);
     const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
 
