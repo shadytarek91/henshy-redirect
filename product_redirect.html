@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title> Henshy </title>
+  <title>Henshy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -30,6 +30,19 @@
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
+    .btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #000;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .btn:hover {
+      background-color: #444;
+    }
   </style>
   <script>
     const productId = new URLSearchParams(window.location.search).get("id");
@@ -41,19 +54,25 @@
       ? "https://play.google.com/store/apps/details?id=com.henshy.app"
       : "https://apps.apple.com/app/id1234567890"; // غيّر الـ App Store ID هنا
 
-    window.location = deepLink;
+    function openApp() {
+      window.location = deepLink;
+      setTimeout(() => {
+        window.location = fallbackUrl;
+      }, 1500);
+    }
 
-    setTimeout(() => {
-      window.location = fallbackUrl;
-    }, 1500);
+    window.addEventListener("load", () => {
+      setTimeout(openApp, 500); // محاولة تلقائية بعد نصف ثانية
+    });
   </script>
 </head>
 <body>
   <div class="container">
-      <img src="https://myvmwawjbuitapdwpaly.supabase.co/storage/v1/object/public/images//gifhenshyblk.gif" alt="Logo" style="width: 90px;">
-    <h4> Henshy app is currently opening. </h4>
+    <img src="https://myvmwawjbuitapdwpaly.supabase.co/storage/v1/object/public/images//gifhenshyblk.gif" alt="Logo" style="width: 90px;">
+    <h4>Henshy app is currently opening.</h4>
     <div class="spinner"></div>
-    <p> Redirecting... If it doesn't happen automatically, you'll be taken to the store. </p>
+    <p>Redirecting... If it doesn't happen automatically, you can click the button below.</p>
+    <button class="btn" onclick="openApp()">Open in App</button>
   </div>
 </body>
 </html>
